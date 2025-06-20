@@ -1,30 +1,42 @@
-# Private File Sharing Using S3 (Simple Storage Service) + Pre-Signed URLs
+# 🔐 Private File Sharing using S3 and Pre-Signed URLs
 
-This project demonstrates how to securely share files stored in Amazon S3 using pre-signed URLs. It simulates best practices for secure access control.
+This project demonstrates **secure file sharing** using AWS S3 (Simple Storage Service) and **pre-signed URLs**.
 
-## 🔧 Technologies Used
-- **Amazon S3** – for file storage
-- **Pre-Signed URLs** – to allow temporary access to private files
-- **IAM (Identity and Access Management)** – to control permissions
-- **Python + boto3** – to generate and test secure download links
+## ✅ What It Does
 
-## 📁 File Structure
+- Uploads a file to a private S3 bucket
+- Generates a **pre-signed URL** to share the file securely
+- Enforces time-limited access (e.g. 60 minutes)
 
-| File | Description |
-|------|-------------|
-| `generate_url.py` | Python script to generate a pre-signed URL |
-| `sample-iam-policy.json` | Example policy for S3 read-only access |
-| `bucket-policy.json` | Bucket policy to deny public & HTTP access |
-| `diagram.png` | Visual diagram of architecture (see below) |
+---
 
-## 🔒 Security Highlights
-- No public access to S3 bucket
-- HTTPS enforced
-- Temporary links only (auto-expire)
-- IAM permissions follow the least privilege principle
+## 🧪 Two Versions of This Project
 
-## 🔗 Sample Output
+### 1. Real AWS S3 (Cloud-Based)
+- Script: `generate_url.py`
+- Requires real AWS credentials
+- Needs AWS S3 bucket set up in the cloud
 
+### 2. LocalStack S3 (Offline Testing)
+- Script: `generate_local_url.py`
+- Runs fully **offline** using Docker + LocalStack
+- Great for **learning and simulation** without cost
+
+---
+
+## 🖼️ Architecture Diagram
+
+![Architecture](diagram.png)
+
+---
+
+## 🚀 How to Run the Local Version
+
+### Prerequisites:
+- Python 3
+- Docker installed
+- LocalStack running locally
+
+### 1. Start LocalStack:
 ```bash
-$ python generate_url.py
-🔗 Pre-signed URL: https://your-bucket.s3.amazonaws.com/example.pdf?... (valid for 1 hour)
+docker run --rm -it -p 4566:4566 -p 4571:4571 localstack/localstack
